@@ -2,17 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Character } from '../../interfaces/character';
 import { CharacterService } from '../../services/character.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, InfiniteScrollModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   allCharacter: Character[] = [];
   filteredCharacter: Character[] = [];
+  name!: string;
+  statusCharacter!: string;
+  currentPage: number = 1;
 
   constructor(private characterService: CharacterService) {}
 
@@ -21,18 +26,49 @@ export class HomeComponent implements OnInit {
   }
 
   getCharacter() {
-    this.characterService.getCharacters().subscribe((data: Character[]) => {
-      this.allCharacter = data;
-      this.filteredCharacter = data;
-    });
+    this.characterService
+      .getCharacters(this.currentPage)
+      .subscribe((data: Character[]) => {
+        this.allCharacter = [...this.allCharacter, ...data];
+        this.allFilter();
+      });
   }
 
-  onSearch(keyboardEvent: KeyboardEvent) {
-    const query = (
-      keyboardEvent.target as HTMLInputElement
-    ).value.toLowerCase();
-    this.filteredCharacter = this.allCharacter.filter((c) =>
-      c.name.toLowerCase().includes(query)
-    );
+  allFilter() {
+    let filtered = this.allCharacter;
+
+    if (this.name) {
+      filtered = filtered.filter((c) =>
+        c.name.toLowerCase().includes(this.name.toLowerCase())
+      );
+    }
+
+    if (this.statusCharacter) {
+      filtered = filtered.filter(
+        (c) => c.status.toLowerCase() === this.statusCharacter.toLowerCase()
+      );
+    }
+
+    this.filteredCharacter = filtered;
+  }
+
+  deadFilter() {
+    this.statusCharacter = 'Dead';
+    this.allFilter();
+  }
+
+  aliveFilter() {
+    this.statusCharacter = 'Alive';
+    this.allFilter();
+  }
+
+  unknownFilter() {
+    this.statusCharacter = 'unknown';
+    this.allFilter();
+  }
+
+  onScroll(): void {
+    this.currentPage++;
+    this.getCharacter();
   }
 }

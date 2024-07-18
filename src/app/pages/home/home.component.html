@@ -5,12 +5,23 @@
 <div class="input">
   <input
     type="text"
-    (keyup)="onSearch($event)"
-    placeholder="Search characters..."
+    (input)="allFilter()"
+    [(ngModel)]="name"
+    placeholder="Search Characters..."
   />
+  <button type="button" class="btn btn-success" (click)="aliveFilter()">Alive</button>
+  <button type="button" class="btn btn-danger" (click)="deadFilter()">Dead</button>
+  <button type="button" class="btn btn-warning" (click)="unknownFilter()">Unknown</button>
 </div>
 
-<div class="cards">
+<div
+  class="cards"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollUpDistance]="1.5"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="onScroll()"
+>
   <div
     *ngFor="let characters of filteredCharacter"
     class="card mb-3"

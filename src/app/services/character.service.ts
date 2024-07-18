@@ -11,9 +11,8 @@ export class CharacterService {
 
   constructor(private http: HttpClient) {}
 
-  getCharacters(): Observable<Character[]> {
-    const url = `${this.apiUrl}`;
+  getCharacters(page: number = 1): Observable<Character[]> {
+    const url = `${this.apiUrl}?page=${page}`;
     return this.http.get<any>(url).pipe(map((response) => response.results));
   }
-  
 }
