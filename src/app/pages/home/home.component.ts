@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
   allCharacter: Character[] = [];
+  filteredCharacter: Character[] = [];
 
   constructor(private characterService: CharacterService) {}
 
@@ -22,6 +23,16 @@ export class HomeComponent implements OnInit {
   getCharacter() {
     this.characterService.getCharacters().subscribe((data: Character[]) => {
       this.allCharacter = data;
+      this.filteredCharacter = data;
     });
+  }
+
+  onSearch(keyboardEvent: KeyboardEvent) {
+    const query = (
+      keyboardEvent.target as HTMLInputElement
+    ).value.toLowerCase();
+    this.filteredCharacter = this.allCharacter.filter((c) =>
+      c.name.toLowerCase().includes(query)
+    );
   }
 }

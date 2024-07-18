@@ -4,13 +4,18 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #202329;
   font-size: 3rem;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 50px;
 }
 
 .title {
   font-size: 90px;
   font-weight: 900;
+}
+
+.input{
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
 .cards {
