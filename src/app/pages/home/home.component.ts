@@ -4,11 +4,12 @@ import { CharacterService } from '../../services/character.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, InfiniteScrollModule],
+  imports: [CommonModule, FormsModule, InfiniteScrollModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

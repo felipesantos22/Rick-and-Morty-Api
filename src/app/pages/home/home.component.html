@@ -7,11 +7,17 @@
     type="text"
     (input)="allFilter()"
     [(ngModel)]="name"
-    placeholder="Search Characters..."
+    placeholder="Search..."
   />
-  <button type="button" class="btn btn-success" (click)="aliveFilter()">Alive</button>
-  <button type="button" class="btn btn-danger" (click)="deadFilter()">Dead</button>
-  <button type="button" class="btn btn-warning" (click)="unknownFilter()">Unknown</button>
+  <button type="button" class="btn btn-success" (click)="aliveFilter()">
+    Alive
+  </button>
+  <button type="button" class="btn btn-danger" (click)="deadFilter()">
+    Dead
+  </button>
+  <button type="button" class="btn btn-warning" (click)="unknownFilter()">
+    Unknown
+  </button>
 </div>
 
 <div
@@ -30,6 +36,7 @@
     <div class="row g-0">
       <div class="col-md-4">
         <img
+          [routerLink]="['/details', characters.id]"
           src="{{ characters.image }}"
           class="img-fluid rounded-start"
           alt="..."
@@ -37,7 +44,9 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{ characters.name }}</h5>
+          <h5 [routerLink]="['details', characters.id]" class="card-title">
+            {{ characters.name }}
+          </h5>
           <p class="card-text">
             This is a wider card with supporting text below as a natural lead-in
             to additional content. This content is a little bit longer.

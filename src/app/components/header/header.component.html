@@ -4,9 +4,10 @@
   </div>
   <nav>
     <ul class="link">
-      <li><a href="#">Docs</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Suporte</a></li>
+      <li><a [routerLink]="['/']">Home</a></li>
+      <li><a [routerLink]="['/contact']">Contact</a></li>
+      <li><a href="#">API</a></li>
     </ul>
   </nav>
 </header>
+<router-outlet></router-outlet>

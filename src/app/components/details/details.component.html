@@ -1,0 +1,39 @@
+<div class="cards">
+  <div
+    *ngIf="character"
+    class="card mb-3"
+    style="max-width: 540px; background-color: #3c3e44; color: white"
+  >
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          [routerLink]="['details', character.id]"
+          src="{{ character.image }}"
+          class="img-fluid rounded-start"
+          alt="..."
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 [routerLink]="['details', character.id]" class="card-title">
+            {{ character.name }}
+          </h5>
+          <p class="card-text">
+            This is a wider card with supporting text below as a natural lead-in
+            to additional content. This content is a little bit longer.
+          </p>
+          <p
+            class="card-text"
+            [ngClass]="{
+              'text-success': character.status === 'Alive',
+              'text-danger': character.status === 'Dead',
+              'text-warning': character.status === 'unknown'
+            }"
+          >
+            <small class="text-body-primary">{{ character.status }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
