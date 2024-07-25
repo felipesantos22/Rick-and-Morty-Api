@@ -18,6 +18,6 @@ export class CharacterService {
 
   getDetails(id: number): Observable<Character> {
     const url = `${this.apiUrl}${id}`;
-    return this.http.get<any>(url).pipe(map((response) => response.results));
+    return this.http.get<Character>(url);
   }
 }

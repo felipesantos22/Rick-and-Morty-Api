@@ -12,7 +12,7 @@ import { CharacterService } from '../../services/character.service';
   styleUrl: './details.component.css',
 })
 export class DetailsComponent implements OnInit {
-  character: Character | null | undefined;
+  character!: Character;
 
   constructor(
     private activatedRoute: ActivatedRoute,
